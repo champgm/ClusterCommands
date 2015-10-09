@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+#Exit the script if any individual command fails
+set -o errexit
+
+#Exit the script if it tries to use any undeclared variables
+set -o nounset
+
+#Un-comment this next line if you want to see exactly what this script is doing
+#set -o xtrace
+
+function printUsage {
+    echo "COMMAND: hold - attempts to create a file and 'tail -f' it to prevent automated logoff"
+    echo "USAGE: hold"
+}
+
+if [[ $# != 0 ]]
+	then printUsage
+		exit 1
+	else
+        echo 'hold' > ~/.hold
+        tail -f ~/.hold
+fi

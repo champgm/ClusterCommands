@@ -19,9 +19,9 @@ if [[ $# != 3 ]]
 		exit 1
 	else
         currentDirectory=$(pwd)
-        export HADOOP_CLIENT_OPTS='-XX:MaxPermSize=512m'
+        export HADOOP_CLIENT_OPTS='-XX:MaxPermSize=512m -Dhttps.protocols=TLSv1'
         export HADOOP_CLASSPATH="$currentDirectory"'/'"$1"
-        childOpts="-Xmx6144m -Xms1536M -Xss1M -XX:MaxPermSize=700M"
+        childOpts="-Xmx8000m -Xms1536M -Xss1M -XX:MaxPermSize=700M"
         #The first argument in childOpts needs to be ~2gb less than mapred.job.map.memory.mb and mapred.job.reduce.memory.mb
-        nohup hadoop jar "$1" -D mapred.child.java.opts="${childOpts}" -D mapred.map.java.opts="${childOpts}" -D mapred.reduce.java.opts="${childOpts}" -D mapred.job.map.memory.mb=8000 -D mapred.job.reduce.memory.mb=8000 -D hbase.rpc.timeout=1000000 -D hbase.regionserver.lease.period=1000000 -D mapred.task.timeout=1800000 $2 2> "$3" 1> "$3" &
+        nohup hadoop jar "$1" -D mapred.child.java.opts="${childOpts}" -D mapred.map.java.opts="${childOpts}" -D mapred.reduce.java.opts="${childOpts}" -D mapred.job.map.memory.mb=10000 -D mapred.job.reduce.memory.mb=10000 -D hbase.rpc.timeout=1000000 -D hbase.regionserver.lease.period=1000000 -D mapred.task.timeout=1800000 $2 2> "$3" 1> "$3" &
 fi

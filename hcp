@@ -19,7 +19,7 @@ if [[ $# != 1 ]]
         currentDirectory=$(pwd)
         currentHadoopClasspath=$(echo "$HADOOP_CLASSPATH")
         echo "previou classpath: ${currentHadoopClasspath}"
-        export HADOOP_CLASSPATH="${currentHadoopClasspath}:${currentDirectory}"'/'"$1"
+        export HADOOP_CLASSPATH="${currentHadoopClasspath}:${currentDirectory}"'/'"${1}"
         newClasspath=$(echo "$HADOOP_CLASSPATH")
         echo "current classpath: ${newClasspath} "
 fi
