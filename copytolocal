@@ -7,18 +7,16 @@ set -o errexit
 set -o nounset
 
 #Un-comment this next line if you want to see exactly what this script is doing
-#set -o xtrace
+set -o xtrace
 
 function printUsage {
-    echo "COMMAND: psme - Lists all processes running as the current user"
-    echo "USAGE: psme"
+    echo "COMMAND: copytolocal - attempts to copy a file from your home folder on HDFS to the local filesystem"
+    echo "USAGE: copytolocal <name of file which is in your home folder on HDFS>"
 }
 
-if [[ $# != 0 ]]
+if [[ $# != 1 ]]
 	then printUsage
 		exit 1
 	else
-
-	currentUser=$(whoami)
-    ps -aux | grep "${currentUser}"
+        hadoop fs -copyToLocal "hdfs:///user/$USER/${1}" .
 fi

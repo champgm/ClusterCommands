@@ -2,6 +2,8 @@
 git fetch origin
 git reset --hard origin/master
 chmod +x checkspace
+chmod +x copyfromlocal
+chmod +x copytolocal
 chmod +x hcp
 chmod +x hold
 chmod +x psme

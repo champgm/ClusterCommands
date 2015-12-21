@@ -10,15 +10,13 @@ set -o nounset
 #set -o xtrace
 
 function printUsage {
-    echo "COMMAND: psme - Lists all processes running as the current user"
-    echo "USAGE: psme"
+    echo "COMMAND: copyfromlocal - attempts to copy a file from the local filesystem into your home directory on HDFS"
+    echo "USAGE: copyfromlocal <local file>"
 }
 
-if [[ $# != 0 ]]
+if [[ $# != 1 ]]
 	then printUsage
 		exit 1
 	else
-
-	currentUser=$(whoami)
-    ps -aux | grep "${currentUser}"
+        hadoop fs -copyFromLocal "${1}" "hdfs:///user/$USER/"
 fi
