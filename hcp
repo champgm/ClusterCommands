@@ -18,7 +18,7 @@ if [[ $# != 1 ]]
     	echo "NOTE: This command MUST be run with a \".\" preceding it. Otherwise, it will seem to have no effect."
         currentDirectory=$(pwd)
         currentHadoopClasspath=$(echo "$HADOOP_CLASSPATH")
-        echo "previou classpath: ${currentHadoopClasspath}"
+        echo "previous classpath: ${currentHadoopClasspath}"
         export HADOOP_CLASSPATH="${currentHadoopClasspath}:${currentDirectory}"'/'"${1}"
         newClasspath=$(echo "$HADOOP_CLASSPATH")
         echo "current classpath: ${newClasspath} "
