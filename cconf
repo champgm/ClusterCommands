@@ -28,7 +28,7 @@ if [[ $# -lt 1 ]]
         fi
 fi
 
-sed -i "\'s/refrecord_nomenclature_v2/${appendText}_refrecord_nomenclature_v2/g\'" "${fileName}"
-sed -i "\'s/refrecord_content_meta_v2/${appendText}_refrecord_content_meta_v2/g\'" "${fileName}"
-sed -i "\'s/refrecord_content_npi_v2/${appendText}_refrecord_content_npi_v2/g\'" "${fileName}"
+sed -i "s/refrecord_nomenclature_v2/${appendText}_refrecord_nomenclature_v2/g" "${fileName}"
+sed -i "s/refrecord_content_meta_v2/${appendText}_refrecord_content_meta_v2/g" "${fileName}"
+sed -i "s/refrecord_content_npi_v2/${appendText}_refrecord_content_npi_v2/g" "${fileName}"
 

@@ -19,7 +19,7 @@ if [[ $# != 3 ]]
 		exit 1
 	else
         currentDirectory=$(pwd)
-        export HADOOP_CLIENT_OPTS='-XX:MaxPermSize=512m  -Xmx12288m -Dhttps.protocols=TLSv1'
+        export HADOOP_CLIENT_OPTS='-XX:MaxPermSize=512m  -Xmx12288m -Dgenerate.dag=true -Dhttps.protocols=TLSv1'
         export HADOOP_CLASSPATH="$currentDirectory"'/'"$1"
         childOpts="-Xmx8000m -Xms1536M -Xss1M -XX:MaxPermSize=700M"
         #The first argument in childOpts needs to be ~2gb less than mapred.job.map.memory.mb and mapred.job.reduce.memory.mb
