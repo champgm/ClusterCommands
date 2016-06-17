@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+#Exit the script if any individual command fails
+set -o errexit
+
+#Exit the script if it tries to use any undeclared variables
+set -o nounset
+
+#Un-comment this next line if you want to see exactly what this script is doing
+set -o xtrace
+
+
+function printUsage {
+    echo "COMMAND: unlockroot - runs a few commands to unlock the root account"
+    echo "USAGE: unlockroot"
+}
+
+if [[ $# != 0 ]]
+    then printUsage
+        exit 1
+fi
+
+sudo sed -i "s/PermitRootLogin no/PermitRootLogin without-password/g" "/etc/ssh/sshd_config"
+sudo /etc/init.d/sshd restart
+sudo pam_tally2 -r
+
+
