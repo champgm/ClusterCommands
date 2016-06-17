@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+#Exit the script if any individual command fails
+set -o errexit
+
+#Exit the script if it tries to use any undeclared variables
+set -o nounset
+
+#Un-comment this next line if you want to see exactly what this script is doing
+set -o xtrace
+
+function printUsage {
+    echo "COMMAND: rechup - Runs a jar with hadoop and a bunch of extra options. Output is directed to file."
+    echo "USAGE: rechup <jar name> \"<command and parameters in quotes>\" <output file name>"
+}
+
+if [[ $# != 3 ]]
+	then printUsage
+		exit 1
+	else
+        currentDirectory=$(pwd)
+        #export HADOOP_CLIENT_OPTS='-XX:MaxPermSize=512m  -Xmx12288m -Dgenerate.dag=true -Dhttps.protocols=TLSv1'
+        export HADOOP_CLASSPATH="$currentDirectory"'/'"$1"
+        childOpts="-Xmx4g -XX:MaxPermSize=512m -XX:+UseConcMarkSweepGC"
+        #The first argument in childOpts needs to be ~2gb less than mapred.job.map.memory.mb and mapred.job.reduce.memory.mb
+        nohup hadoop jar "$1" -D mapred.child.java.opts="${childOpts}" -D mapred.map.java.opts="${childOpts}" -D mapred.reduce.java.opts="${childOpts}" -D hbase.rpc.timeout=1000000 -D hbase.regionserver.lease.period=1000000 -D mapred.task.timeout=1800000 $2 2> "$3" 1> "$3" &
+fi
