@@ -14,15 +14,15 @@ function printUsage {
     echo "USAGE: rechup <jar name> \"<command and parameters in quotes>\" <output file name>"
 }
 
-if [[ $# != 3 ]]
+if [[ $# != 5 ]]
 	then printUsage
 		exit 1
 	else
 
         currentDirectory=$(pwd)
-        export HADOOP_CLIENT_OPTS='-XX:MaxPermSize=512m  -Xmx4g -Dgenerate.dag=true -Dhttps.protocols=TLSv1'
+        export HADOOP_CLIENT_OPTS='-XX:MaxPermSize=512m -Xmx4g -Dgenerate.dag=true -Dhttps.protocols=TLSv1'
         export HADOOP_CLASSPATH="$currentDirectory"'/'"${3}"
         childOpts="-Xmx${1}g -Xms${1}g -XX:MaxPermSize=512m"
         #The first argument in childOpts needs to be ~2gb less than mapred.job.map.memory.mb and mapred.job.reduce.memory.mb
-        nohup hadoop jar "${3}" -D mapred.child.java.opts="${childOpts}" -D mapred.map.java.opts="${childOpts}" -D mapred.reduce.java.opts="${childOpts}" -D mapred.job.map.memory.mb="${2}000" -D mapred.job.reduce.memory.mb="${2}000" "${4}" 2> "${5}" 1> "${5}" &
+        nohup hadoop jar "${3}" -D mapred.child.java.opts="${childOpts}" -D mapred.map.java.opts="${childOpts}" -D mapred.reduce.java.opts="${childOpts}" -D mapred.job.map.memory.mb="${2}000" -D mapred.job.reduce.memory.mb="${2}000" $4 2> "${5}" 1> "${5}" &
 fi
