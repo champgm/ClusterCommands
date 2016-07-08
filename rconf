@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+
+#Exit the script if any individual command fails
+set -o errexit
+
+#Exit the script if it tries to use any undeclared variables
+set -o nounset
+
+#Un-comment this next line if you want to see exactly what this script is doing
+set -o xtrace
+
+
+function printUsage {
+    echo "COMMAND: cconf - appends something content-record config.yaml's table names"
+    echo "USAGE: cconf <target config file> <optional replacement text>"
+}
+
+if [[ $# -lt 1 ]]
+    then printUsage
+        exit 1
+    else
+        fileName="${1}"
+        if [[ $# != 1 ]]
+            then
+                appendText="${2}"
+            else
+                appendText="MAC"
+        fi
+fi
+
+sed -i "s/refrecord_person_stream_1_0/${appendText}_refrecord_person_stream_1_0/g" "${fileName}"
+sed -i "s/refrecord_person_snapshot_1_0/${appendText}_refrecord_person_snapshot_1_0/g" "${fileName}"
+sed -i "s/refrecord_meta_1_0/${appendText}_refrecord_meta_1_0/g" "${fileName}"
+sed -i "s/refrecord_benefit_plan_1_0/${appendText}_refrecord_benefit_plan_1_0/g" "${fileName}"
+sed -i "s/refrecord_organization_1_0/${appendText}_refrecord_organization_1_0/g" "${fileName}"
+sed -i "s/refrecord-updated-record_1_0/${appendText}_refrecord-updated-record_1_0/g" "${fileName}"
+sed -i "s/refrecord_financial_record_1_0/${appendText}_refrecord_financial_record_1_0/g" "${fileName}"
+sed -i "s/refrecord_account_record_1_0/${appendText}_refrecord_account_record_1_0/g" "${fileName}"
+sed -i "s/refrecord_reference_slot_1_0/${appendText}_refrecord_reference_slot_1_0/g" "${fileName}"
+sed -i "s/refrecord_reference_location_1_0/${appendText}_refrecord_reference_location_1_0/g" "${fileName}"
+sed -i "s/refrecord_event_1_0/${appendText}_refrecord_event_1_0/g" "${fileName}"
+sed -i "s/refrecord_costcenter_1_0/${appendText}_refrecord_costcenter_1_0/g" "${fileName}"
+sed -i "s/refrecord_entitykey_store_1_0/${appendText}_refrecord_entitykey_store_1_0/g" "${fileName}"
+
+

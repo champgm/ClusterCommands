@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+#Exit the script if any individual command fails
+set -o errexit
+
+#Exit the script if it tries to use any undeclared variables
+set -o nounset
+
+#Un-comment this next line if you want to see exactly what this script is doing
+#set -o xtrace
+
+function printUsage {
+    echo "COMMAND: compacttable - attempts to run major compaction on a table"
+    echo "USAGE: compacttable <table name>"
+}
+
+if [[ $# != 2 ]]
+	then printUsage
+		exit 1
+	else
+	    echo "Will attempt to compact: ${1}"
+        echo "compact '${1}'" | hbase shell
+fi
