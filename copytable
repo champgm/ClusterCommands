@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+#Exit the script if any individual command fails
+set -o errexit
+
+#Exit the script if it tries to use any undeclared variables
+set -o nounset
+
+#Un-comment this next line if you want to see exactly what this script is doing
+#set -o xtrace
+
+function printUsage {
+    echo "COMMAND: copytable - attempts to copy an HBase table using a snapshot"
+    echo "USAGE: copytable <target table name> <copy table name>"
+}
+
+if [[ $# != 2 ]]
+	then printUsage
+		exit 1
+	else
+        echo "snapshot '${1}', '${1}-snapshot';clone_snapshot '${1}-snapshot', '${2}'" | hbase shell
+fi
