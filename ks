@@ -7,8 +7,8 @@ set -o errexit
 #set -o xtrace
 
 function printUsage {
-    echo "COMMAND: killscreen - Kills a screen session. Find session IDs with 'screen -ls'"
-    echo "USAGE: killscreen <session ID>"
+    echo "COMMAND: ks - Kills a screen session. Find session IDs with 'screen -ls'"
+    echo "USAGE: ks <session ID>"
 }
 
 if [[ $# != 1 ]]
